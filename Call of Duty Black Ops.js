@@ -38,7 +38,7 @@ Game.Hook.UseAlpha8CustomDll = false;
 Game.InjectHookXinput = false;
 Game.PromptBetweenInstances = false;
 Game.ProcessChangesAtEnd = false;
-Game.PauseBetweenProcessGrab = 10;
+Game.PauseBetweenProcessGrab = 20;
 Game.PauseBetweenStarts = 0; 
 Game.PauseBetweenContextAndLaunch = 5;
 Game.ResetWindows = true;
@@ -76,10 +76,12 @@ Game.Play = function()
     Game.LockInputSuspendsExplorer = false;
     Game.LockInputToggleKey = 0x23;
 
-
-    Context.RunAdditionalFiles([Context.ScriptFolder + "\\start.bat"], false, 10);
-    Context.RunAdditionalFiles([Context.ScriptFolder + "\\F4Swap.bat"], false, 10);
-    Context.RunAdditionalFiles([Context.ScriptFolder + "\\F3Restart.bat"], false, 10);
+    if (Context.PlayerID === 0)
+    {
+        Context.RunAdditionalFiles([Context.ScriptFolder + "\\start.bat"], false, 10);
+        Context.RunAdditionalFiles([Context.ScriptFolder + "\\F4Swap.bat"], false, 10);
+        Context.RunAdditionalFiles([Context.ScriptFolder + "\\F3Restart.bat"], false, 10);
+    }
 
     var base = Context.GetFolder(Nucleus.Folder.InstancedGameFolder);
     var documents = Context.GetFolder(Nucleus.Folder.Documents)
